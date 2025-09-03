@@ -1,0 +1,184 @@
+name: "📊 Data/Content Update"
+description: "Request updates to activities, student data, or other content"
+title: "[DATA] "
+labels: ["data", "content", "copilot-ready"]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for requesting a data or content update! Please provide detailed information so our Copilot coding agent can make the necessary changes safely and accurately.
+
+  - type: textarea
+    id: data-update-request
+    attributes:
+      label: "Data Update Request"
+      description: "What specific data or content needs to be updated?"
+      placeholder: "Need to add difficulty levels to existing activities and create filtering functionality. Currently all activities show for all students regardless of skill level..."
+    validations:
+      required: true
+
+  - type: dropdown
+    id: data-type
+    attributes:
+      label: "Data Type"
+      description: "What type of data needs updating?"
+      options:
+        - Activities/Events
+        - Student Information
+        - User Accounts
+        - Categories/Tags  
+        - Configuration Settings
+        - Static Content/Text
+        - Database Schema
+        - Sample/Test Data
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: current-data-state
+    attributes:
+      label: "Current Data State"
+      description: "What is the current state of this data?"
+      placeholder: |
+        Current activities in database have these fields:
+        - id, name, description, date, time, location, max_participants
+        Missing difficulty level field
+        All activities show to all users regardless of skill level
+    validations:
+      required: true
+
+  - type: textarea
+    id: desired-data-state
+    attributes:
+      label: "Desired Data State"
+      description: "What should the data look like after the update?"
+      placeholder: |
+        Activities should have additional difficulty field with values:
+        - Beginner
+        - Intermediate  
+        - Advanced
+        - All Levels (default if not specified)
+        
+        Need filtering in UI to show activities by difficulty level
+    validations:
+      required: true
+
+  - type: dropdown
+    id: update-scope
+    attributes:
+      label: "Update Scope"
+      description: "How extensive is this data update?"
+      options:
+        - Add new data fields/columns
+        - Modify existing data values  
+        - Delete/remove data
+        - Restructure data format
+        - Add new data records
+        - Import data from external source
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: data-location
+    attributes:
+      label: "Data Location"
+      description: "Where is this data currently stored? (files, database, configuration, etc.)"
+      placeholder: |
+        - Activities stored in: src/backend/database.py (sample data)  
+        - Database initialization in: src/backend/database.py
+        - API endpoints in: src/backend/routers/activities.py
+        - Frontend displays data from: /api/activities endpoint
+    validations:
+      required: true
+
+  - type: textarea
+    id: data-requirements
+    attributes:
+      label: "Data Requirements & Validation"
+      description: "What are the requirements, constraints, or validation rules for this data?"
+      placeholder: |
+        - Difficulty field should be optional (defaults to 'All Levels')
+        - Must maintain backward compatibility with existing data
+        - Validation: difficulty must be one of the 4 allowed values
+        - Don't show difficulty on card if it's 'All Levels'
+    
+  - type: textarea
+    id: sample-data
+    attributes:
+      label: "Sample Data"
+      description: "Provide examples of the data updates needed"
+      placeholder: |
+        Example updated activity records:
+        {
+          "name": "Robotics Club",
+          "difficulty": "Advanced",
+          "description": "Build and program robots"
+        }
+        {
+          "name": "Drama Club", 
+          "difficulty": "All Levels",
+          "description": "Theater and performance"
+        }
+
+  - type: dropdown
+    id: backup-needed
+    attributes:
+      label: "Backup Required"
+      description: "Should existing data be backed up before changes?"
+      options:
+        - Yes - Critical data that must be preserved
+        - No - Safe to modify directly (test/sample data)
+        - Unsure - Let agent decide based on data importance
+    validations:
+      required: true
+
+  - type: textarea
+    id: files-affected
+    attributes:
+      label: "Files That May Be Affected"
+      description: "List files that likely need changes for this data update"
+      placeholder: |
+        - src/backend/database.py (add sample data with difficulty levels)
+        - src/backend/routers/activities.py (update API to handle difficulty field)
+        - src/static/app.js (add filtering functionality)  
+        - src/static/styles.css (styling for filters)
+        - src/static/index.html (filter UI elements)
+
+  - type: textarea
+    id: testing-instructions
+    attributes:
+      label: "Testing Instructions"
+      description: "How can the agent verify the data update worked correctly?"
+      placeholder: |
+        1. Check that existing activities still display correctly
+        2. Verify new difficulty field appears in API response
+        3. Test filtering functionality shows correct activities
+        4. Confirm 'All Levels' activities appear in all filter views
+        5. Validate mobile/responsive display of filters
+
+  - type: textarea
+    id: rollback-plan
+    attributes:
+      label: "Rollback Plan"
+      description: "What should happen if this data update causes issues?"
+      placeholder: "If issues occur, can safely remove difficulty field and filtering UI - existing functionality should continue working..."
+
+  - type: checkboxes
+    id: data-ready
+    attributes:
+      label: "Data Update Readiness" 
+      description: "Confirm this request provides enough detail for a coding agent"
+      options:
+        - label: "I have clearly specified what data needs to be changed"
+          required: true
+        - label: "I have provided the current and desired data states"
+          required: true
+        - label: "I have indicated where the data is currently stored"
+          required: true  
+        - label: "I have included sample data and validation requirements"
+          required: true
+        - label: "I have provided instructions for testing the changes"
+          required: true

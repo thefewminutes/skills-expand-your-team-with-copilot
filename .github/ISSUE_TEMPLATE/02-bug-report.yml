@@ -1,0 +1,136 @@
+name: "🐛 Bug Report"
+description: "Report a bug or issue with existing functionality"
+title: "[BUG] "
+labels: ["bug", "copilot-ready"]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for reporting a bug! Please provide detailed information so our Copilot coding agent can diagnose and fix the issue without additional clarification.
+
+  - type: textarea
+    id: bug-description
+    attributes:
+      label: "Bug Description"
+      description: "Clearly describe what is currently happening vs. what should be happening."
+      placeholder: "The website is blue, but our school colors are white and lime green. The current colors don't match our school branding..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps-to-reproduce
+    attributes:
+      label: "Steps to Reproduce"
+      description: "List the exact steps to reproduce the bug, in order."
+      placeholder: |
+        1. Navigate to the main page
+        2. Look at the header background color
+        3. Notice it's blue instead of lime green
+        4. Check activity cards - they also use wrong colors
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected-behavior
+    attributes:
+      label: "Expected Behavior"
+      description: "Describe what should happen instead."
+      placeholder: "Website should use school colors: white background with lime green accents and highlights..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: current-behavior
+    attributes:
+      label: "Current (Incorrect) Behavior"
+      description: "Describe what actually happens."
+      placeholder: "Website uses blue color scheme instead of school colors..."
+    validations:
+      required: true
+
+  - type: dropdown
+    id: severity
+    attributes:
+      label: "Bug Severity"
+      description: "How severe is this bug?"
+      options:
+        - Critical - System is broken/unusable
+        - High - Major functionality is impaired
+        - Medium - Minor functionality issue or visual problem
+        - Low - Cosmetic issue
+    validations:
+      required: true
+
+  - type: dropdown
+    id: bug-type
+    attributes:
+      label: "Bug Type"
+      description: "What type of bug is this?"
+      options:
+        - Visual/UI Issue
+        - Functional Bug
+        - Performance Issue
+        - Data Issue
+        - Compatibility Issue
+        - Security Issue
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: browser-environment
+    attributes:
+      label: "Browser & Environment"
+      description: "What browser and device are you using?"
+      placeholder: |
+        - Browser: Chrome 118
+        - Device: Desktop/Mobile  
+        - Operating System: Windows 11
+    validations:
+      required: true
+
+  - type: textarea
+    id: technical-details
+    attributes:
+      label: "Technical Details & Clues"  
+      description: "Any technical information that might help identify the root cause?"
+      placeholder: |
+        - Console errors (if any)
+        - Specific CSS classes or elements affected
+        - Files that might contain the issue
+        - Recent changes that might have caused this
+    
+  - type: textarea
+    id: suggested-fix
+    attributes:
+      label: "Suggested Fix (Optional)"
+      description: "If you have ideas about how to fix this, please share them."
+      placeholder: |
+        - Update CSS variables in styles.css
+        - Change blue (#007bff) to lime green (#32cd32)
+        - Consider adding school mascot images from https://octodex.github.com/
+
+  - type: textarea
+    id: files-involved
+    attributes:
+      label: "Files That May Be Involved"
+      description: "List files you think might need to be examined or modified"
+      placeholder: |
+        - src/static/styles.css
+        - src/static/index.html
+
+  - type: checkboxes
+    id: bug-ready
+    attributes:
+      label: "Bug Report Readiness"
+      description: "Confirm this bug report provides enough detail for a coding agent"
+      options:
+        - label: "I have provided clear steps to reproduce the issue"
+          required: true
+        - label: "I have described both expected and current behavior"
+          required: true
+        - label: "I have included browser/environment information"
+          required: true
+        - label: "This issue can be diagnosed and fixed without requiring additional clarifications"
+          required: true

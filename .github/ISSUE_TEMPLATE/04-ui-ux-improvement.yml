@@ -1,0 +1,159 @@
+name: "🎨 UI/UX Improvement"
+description: "Request improvements to user interface or user experience"
+title: "[UI/UX] "
+labels: ["ui", "ux", "copilot-ready"]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for suggesting a UI/UX improvement! Please provide detailed information so our Copilot coding agent can implement the visual or experience changes.
+
+  - type: textarea
+    id: current-ui-issue
+    attributes:
+      label: "Current UI/UX Issue"
+      description: "What specific UI or UX problem are users experiencing?"
+      placeholder: "The current card view makes it difficult to see time conflicts and overlapping activities. Users can't easily visualize their schedule..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposed-ui-solution
+    attributes:
+      label: "Proposed UI/UX Solution"
+      description: "Describe the specific visual or interaction improvements you'd like to see."
+      placeholder: |
+        Add a view toggle in the top bar that allows switching between card view and calendar view:
+        - Calendar view shows 1 week (Sunday-Saturday)  
+        - Activities align with their actual time slots
+        - Multiple activities at same time show side-by-side
+        - Hover shows full activity details
+    validations:
+      required: true
+
+  - type: textarea
+    id: user-benefit
+    attributes:
+      label: "User Benefit"
+      description: "How will this improvement help users? What problem does it solve?"
+      placeholder: "Students will be able to easily spot schedule conflicts, see their week at a glance, and make better decisions about activity registration..."
+    validations:
+      required: true
+
+  - type: dropdown
+    id: ui-component-type
+    attributes:
+      label: "UI Component Type"
+      description: "What type of UI component or area needs improvement?"
+      options:
+        - Navigation/Menu
+        - Layout/Grid System
+        - Forms/Input Fields
+        - Cards/Lists
+        - Buttons/Controls
+        - Calendar/Date picker
+        - Modal/Dialog
+        - Color scheme/Theme
+        - Typography/Text
+        - Icons/Images
+        - Responsive design
+        - Other
+    validations:
+      required: true
+
+  - type: dropdown
+    id: devices-affected
+    attributes:
+      label: "Devices Affected"
+      description: "Which devices should this improvement support?"
+      multiple: true
+      options:
+        - Desktop/Laptop
+        - Tablet
+        - Mobile Phone
+        - All devices
+    validations:
+      required: true
+
+  - type: textarea
+    id: visual-specifications
+    attributes:
+      label: "Visual Specifications"
+      description: "Provide specific visual details (colors, sizes, layout, spacing, etc.)"
+      placeholder: |
+        - Calendar grid: 7 columns (days) x time slots (hourly rows)
+        - Activity blocks: colored rectangles with rounded corners
+        - Hover effect: shadow and border highlight
+        - Toggle button: icon changes between grid and calendar view
+        - Responsive: stack vertically on mobile
+    
+  - type: textarea
+    id: interaction-details
+    attributes:
+      label: "Interaction Details"
+      description: "Describe how users should interact with this improvement"
+      placeholder: |
+        - Click toggle button to switch views
+        - Hover over calendar events to see details
+        - Click events to open full activity info
+        - Drag to scroll through different weeks (future enhancement)
+    
+  - type: textarea
+    id: technical-implementation
+    attributes:
+      label: "Technical Implementation Hints"
+      description: "Any specific technical approaches, libraries, or code patterns to consider?"
+      placeholder: |
+        - Use CSS Grid or Flexbox for calendar layout
+        - JavaScript to handle view switching
+        - Consider using existing date/time utilities
+        - Make sure it works with existing activity data structure
+    
+  - type: textarea
+    id: files-to-modify-ui
+    attributes:
+      label: "Files That May Need Changes"
+      description: "List specific files you think need UI/UX modifications"
+      placeholder: |
+        - src/static/styles.css (new calendar styles)
+        - src/static/app.js (view switching logic)
+        - src/static/index.html (toggle button, calendar container)
+
+  - type: dropdown
+    id: priority-level
+    attributes:
+      label: "Priority Level"
+      description: "How important is this UI/UX improvement?"
+      options:
+        - High - Major usability issue affecting daily use
+        - Medium - Significant user experience improvement
+        - Low - Nice visual enhancement
+    validations:
+      required: true
+
+  - type: textarea
+    id: accessibility-considerations
+    attributes:
+      label: "Accessibility Considerations"
+      description: "Any accessibility requirements or considerations for this UI change?"
+      placeholder: |
+        - Should work with screen readers
+        - Keyboard navigation support needed
+        - Color contrast requirements
+        - Text alternative for visual elements
+
+  - type: checkboxes
+    id: ui-ready
+    attributes:
+      label: "UI/UX Implementation Readiness"
+      description: "Confirm this request provides enough detail for a coding agent"
+      options:
+        - label: "I have described the specific visual or interaction improvements needed"
+          required: true
+        - label: "I have explained how this benefits users"
+          required: true
+        - label: "I have provided visual specifications and interaction details"
+          required: true
+        - label: "This can be implemented without requiring design mockups or additional clarification"
+          required: true

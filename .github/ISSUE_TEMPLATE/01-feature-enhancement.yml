@@ -1,0 +1,111 @@
+name: "🚀 Feature Enhancement Request"
+description: "Request a new feature or enhancement to existing functionality"
+title: "[FEATURE] "
+labels: ["enhancement", "copilot-ready"]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for suggesting a feature enhancement! Please provide detailed information so our Copilot coding agent can implement this without needing additional clarification.
+  
+  - type: textarea
+    id: problem-description
+    attributes:
+      label: "Problem Description"
+      description: "Clearly describe the problem or need this feature addresses. What specific issue are students, teachers, or users experiencing?"
+      placeholder: "Students are having difficulty finding activities because they all look the same in the current list view..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposed-solution
+    attributes:
+      label: "Proposed Solution"
+      description: "Describe the specific feature or enhancement you'd like to see implemented."
+      placeholder: "Add a toggle button in the top right that allows switching between dark and light mode..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance-criteria
+    attributes:
+      label: "Acceptance Criteria"
+      description: "List the specific, measurable criteria that define when this feature is complete. Use bullet points or checkboxes."
+      placeholder: |
+        - [ ] Toggle button appears in top-right corner
+        - [ ] Button switches between sun (light mode) and moon (dark mode) icons  
+        - [ ] All colors adapt appropriately to selected theme
+        - [ ] User preference is saved and restored on page reload
+        - [ ] Feature works on both desktop and mobile devices
+    validations:
+      required: true
+
+  - type: dropdown
+    id: feature-type
+    attributes:
+      label: "Feature Type"
+      description: "What type of feature enhancement is this?"
+      options:
+        - UI/UX Improvement
+        - New Functionality
+        - Performance Enhancement  
+        - Accessibility Improvement
+        - Data Management
+        - Integration/API
+        - Other
+    validations:
+      required: true
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: "Priority Level"
+      description: "How important is this feature for daily operations?"
+      options:
+        - High - Blocking daily operations
+        - Medium - Significantly improves user experience
+        - Low - Nice to have enhancement
+    validations:
+      required: true
+
+  - type: textarea
+    id: technical-hints
+    attributes:
+      label: "Technical Hints & Suggestions"
+      description: "Provide any technical guidance, file locations, libraries, or implementation approaches that might help."
+      placeholder: |
+        - Modify styles.css to add CSS variables for theme colors
+        - Add toggle functionality in app.js  
+        - Consider using CSS custom properties for easy theme switching
+        - Look at similar implementations in other projects
+    
+  - type: textarea
+    id: files-to-modify
+    attributes:
+      label: "Files That May Need Changes"
+      description: "List specific files you think need to be modified (if you know)"
+      placeholder: |
+        - src/static/styles.css
+        - src/static/app.js
+        - src/static/index.html
+
+  - type: textarea
+    id: limitations-context
+    attributes:
+      label: "Limitations & Additional Context"
+      description: "Any constraints, dependencies, or additional context that should be considered?"
+      placeholder: "Should maintain compatibility with existing user data. Don't change the database schema unless absolutely necessary..."
+
+  - type: checkboxes
+    id: implementation-ready
+    attributes:
+      label: "Implementation Readiness"
+      description: "Confirm this issue provides enough detail for a coding agent"
+      options:
+        - label: "I have provided clear problem description and acceptance criteria"
+          required: true
+        - label: "I have included technical hints or suggestions where possible"  
+          required: false
+        - label: "This can be implemented without requiring additional meetings or clarifications"
+          required: true

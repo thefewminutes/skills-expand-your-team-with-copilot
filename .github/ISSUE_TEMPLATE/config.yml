@@ -1,6 +1,9 @@
 blank_issues_enabled: false
 contact_links:
-  - name: 📚 Documentation
+  - name: 📚 Issue Template Guide
+    url: https://github.com/thefewminutes/skills-expand-your-team-with-copilot/blob/main/docs/issue-templates-guide.md
+    about: Learn how to use issue templates effectively for Copilot coding agents
+  - name: 📖 Documentation
     url: https://github.com/thefewminutes/skills-expand-your-team-with-copilot/tree/main/docs
     about: Check the documentation for development guides and help
   - name: 💬 Discussion

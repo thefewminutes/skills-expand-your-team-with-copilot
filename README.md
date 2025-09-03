@@ -31,6 +31,10 @@
 
 </div>
 
+## 📝 Issue Templates for Teachers
+
+This repository includes structured issue template forms to help teachers submit clear requests that Copilot coding agents can implement. [Learn how to use issue templates →](docs/issue-templates-guide.md)
+
 ---
 
 &copy; 2025 GitHub &bull; [Code of Conduct](https://www.contributor-covenant.org/version/2/1/code_of_conduct/code_of_conduct.md) &bull; [MIT License](https://gh.io/mit)

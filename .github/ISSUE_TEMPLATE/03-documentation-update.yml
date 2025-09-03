@@ -1,0 +1,136 @@
+name: "📝 Documentation Update"
+description: "Request updates to documentation, README files, or help content"
+title: "[DOCS] "
+labels: ["documentation", "copilot-ready"]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for helping improve our documentation! Please provide detailed information so our Copilot coding agent can update the documentation accurately.
+
+  - type: textarea
+    id: documentation-issue
+    attributes:
+      label: "Documentation Issue"
+      description: "What is wrong or missing in the current documentation?"
+      placeholder: "The main README file in the `src` folder appears to have been forgotten about and doesn't match the current state of the website..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: current-documentation
+    attributes:
+      label: "Current Documentation Content"
+      description: "What does the documentation currently say? (Copy/paste the outdated content)"
+      placeholder: |
+        Current README says:
+        ```
+        # Simple Activity App
+        A basic app for viewing activities
+        ```
+        But the app now has signup functionality, user authentication, etc.
+    validations:
+      required: true
+
+  - type: textarea
+    id: desired-documentation
+    attributes:
+      label: "Desired Documentation Content"
+      description: "What should the documentation say instead? Provide the updated content."
+      placeholder: |
+        Should include:
+        - Updated description reflecting current features
+        - List of all available features (view activities, sign up, user auth)
+        - API endpoints documentation
+        - Setup instructions
+        - Usage examples
+    validations:
+      required: true
+
+  - type: dropdown
+    id: documentation-type
+    attributes:
+      label: "Documentation Type"
+      description: "What type of documentation needs updating?"
+      options:
+        - README files
+        - API documentation
+        - User guides
+        - Developer guides  
+        - Code comments
+        - Help/FAQ content
+        - Installation instructions
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: files-to-update
+    attributes:
+      label: "Files to Update"
+      description: "List the specific files that need documentation updates"
+      placeholder: |
+        - src/README.md
+        - docs/user-guide.md
+        - docs/api-documentation.md
+    validations:
+      required: true
+
+  - type: textarea
+    id: accuracy-sources
+    attributes:
+      label: "Sources for Accurate Information"
+      description: "Where can the agent find current, accurate information about features/functionality?"
+      placeholder: |
+        - Check src/app.py for current API endpoints
+        - Look at src/static/index.html for current UI features  
+        - Review src/backend/ directory for backend functionality
+        - Check package.json/requirements.txt for dependencies
+
+  - type: dropdown
+    id: urgency
+    attributes:
+      label: "Update Urgency"
+      description: "How urgent is this documentation update?"
+      options:
+        - High - Blocking users or developers
+        - Medium - Important for user experience
+        - Low - Good to have for completeness
+    validations:
+      required: true
+
+  - type: textarea
+    id: target-audience
+    attributes:
+      label: "Target Audience"
+      description: "Who is the primary audience for this documentation?"
+      placeholder: "Teachers setting up the system, students using the app, developers contributing to the project..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: "Additional Context"
+      description: "Any other information that would help create accurate documentation?"
+      placeholder: |
+        - Recent changes that aren't documented
+        - Common questions users ask
+        - Known limitations that should be mentioned
+        - Links to related documentation
+
+  - type: checkboxes
+    id: documentation-ready
+    attributes:
+      label: "Documentation Update Readiness"
+      description: "Confirm this request provides enough detail for a coding agent"
+      options:
+        - label: "I have clearly identified what documentation is incorrect or missing"
+          required: true
+        - label: "I have provided guidance on what the correct content should be"
+          required: true  
+        - label: "I have listed the specific files that need updating"
+          required: true
+        - label: "I have indicated where to find current, accurate information"
+          required: true

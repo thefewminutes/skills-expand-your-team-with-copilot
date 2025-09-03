@@ -4,34 +4,39 @@ Authentication endpoints for the High School Management System API
 
 from fastapi import APIRouter, HTTPException
 from typing import Dict, Any
-import hashlib
+from argon2 import PasswordHasher
 
-from ..database import teachers_collection
+from ..database import teachers_collection, MONGODB_AVAILABLE
 
 router = APIRouter(
     prefix="/auth",
     tags=["auth"]
 )
 
-def hash_password(password):
-    """Hash password using SHA-256"""
-    return hashlib.sha256(password.encode()).hexdigest()
-
-@router.post("/login")
 def login(username: str, password: str) -> Dict[str, Any]:
     """Login a teacher account"""
-    # Hash the provided password
-    hashed_password = hash_password(password)
+    from ..database import _fallback_teachers
     
     # Find the teacher in the database
-    teacher = teachers_collection.find_one({"_id": username})
+    teacher = None
+    if MONGODB_AVAILABLE:
+        teacher = teachers_collection.find_one({"_id": username})
+    else:
+        teacher = _fallback_teachers.get(username)
     
-    if not teacher or teacher["password"] != hashed_password:
+    if not teacher:
+        raise HTTPException(status_code=401, detail="Invalid username or password")
+    
+    # Verify password using Argon2
+    ph = PasswordHasher()
+    try:
+        ph.verify(teacher["password"], password)
+    except Exception:
         raise HTTPException(status_code=401, detail="Invalid username or password")
     
     # Return teacher information (excluding password)
     return {
-        "username": teacher["username"],
+        "username": teacher.get("username", username),
         "display_name": teacher["display_name"],
         "role": teacher["role"]
     }
@@ -39,13 +44,19 @@ def login(username: str, password: str) -> Dict[str, Any]:
 @router.get("/check-session")
 def check_session(username: str) -> Dict[str, Any]:
     """Check if a session is valid by username"""
-    teacher = teachers_collection.find_one({"_id": username})
+    from ..database import _fallback_teachers
+    
+    teacher = None
+    if MONGODB_AVAILABLE:
+        teacher = teachers_collection.find_one({"_id": username})
+    else:
+        teacher = _fallback_teachers.get(username)
     
     if not teacher:
         raise HTTPException(status_code=404, detail="Teacher not found")
     
     return {
-        "username": teacher["username"],
+        "username": teacher.get("username", username),
         "display_name": teacher["display_name"],
         "role": teacher["role"]
     }

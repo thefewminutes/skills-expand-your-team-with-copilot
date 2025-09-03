@@ -4,12 +4,23 @@ MongoDB database configuration and setup for Mergington High School API
 
 from pymongo import MongoClient
 from argon2 import PasswordHasher
+import os
 
-# Connect to MongoDB
-client = MongoClient('mongodb://localhost:27017/')
-db = client['mergington_high']
-activities_collection = db['activities']
-teachers_collection = db['teachers']
+# Connect to MongoDB with error handling for development
+try:
+    client = MongoClient('mongodb://localhost:27017/', serverSelectionTimeoutMS=5000)
+    # Test the connection
+    client.admin.command('ismaster')
+    db = client['mergington_high']
+    activities_collection = db['activities']
+    teachers_collection = db['teachers']
+    MONGODB_AVAILABLE = True
+except Exception as e:
+    print(f"MongoDB not available: {e}")
+    # Create a fallback in-memory storage for development
+    activities_collection = None
+    teachers_collection = None
+    MONGODB_AVAILABLE = False
 
 # Methods
 def hash_password(password):
@@ -17,18 +28,29 @@ def hash_password(password):
     ph = PasswordHasher()
     return ph.hash(password)
 
+# In-memory fallback storage
+_fallback_activities = {}
+_fallback_teachers = {}
+
 def init_database():
     """Initialize database if empty"""
-
-    # Initialize activities if empty
-    if activities_collection.count_documents({}) == 0:
-        for name, details in initial_activities.items():
-            activities_collection.insert_one({"_id": name, **details})
-            
-    # Initialize teacher accounts if empty
-    if teachers_collection.count_documents({}) == 0:
-        for teacher in initial_teachers:
-            teachers_collection.insert_one({"_id": teacher["username"], **teacher})
+    if MONGODB_AVAILABLE:
+        # Initialize activities if empty
+        if activities_collection.count_documents({}) == 0:
+            for name, details in initial_activities.items():
+                activities_collection.insert_one({"_id": name, **details})
+                
+        # Initialize teacher accounts if empty
+        if teachers_collection.count_documents({}) == 0:
+            for teacher in initial_teachers:
+                teachers_collection.insert_one({"_id": teacher["username"], **teacher})
+    else:
+        # Use fallback in-memory storage
+        global _fallback_activities, _fallback_teachers
+        if not _fallback_activities:
+            _fallback_activities = {name: details for name, details in initial_activities.items()}
+        if not _fallback_teachers:
+            _fallback_teachers = {teacher["username"]: teacher for teacher in initial_teachers}
 
 # Initial database if empty
 initial_activities = {
@@ -163,6 +185,17 @@ initial_activities = {
         },
         "max_participants": 16,
         "participants": ["william@mergington.edu", "jacob@mergington.edu"]
+    },
+    "Manga Maniacs": {
+        "description": "Explore the fantastic stories of the most interesting characters from Japanese Manga (graphic novels).",
+        "schedule": "Tuesdays, 7:00 PM - 8:30 PM",
+        "schedule_details": {
+            "days": ["Tuesday"],
+            "start_time": "19:00",
+            "end_time": "20:30"
+        },
+        "max_participants": 15,
+        "participants": []
     }
 }
 
